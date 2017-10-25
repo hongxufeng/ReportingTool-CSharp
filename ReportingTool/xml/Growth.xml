@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="学生作品" name="(SELECT  t_imsopus.OBJ_ID,t_imsstudent.XH,t_imsstudent.XM,t_imsopus.opus,t_imsopus.typename,t_imsstudent.classes                                              
+                                     FROM t_imsopus
+                                     join t_imsstudent on t_imsstudent.XH=t_imsopus.studentid)AS t_imsopus"
+         admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="classes,XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名" search-type="true"></XM>
+    <opus text="作品" search-type="true"></opus>
+    <typename text="类型" search-type="true" search-adv="true"></typename>
+    <XH visibility="hidden"></XH>
+    <classes text="班级" search-type="true"></classes>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新增作品"></span>新增
+      </span>
+      <span class="rt-pager-btn" onclick="deleteConfirm('学生作品','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除作品"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="简历学生作品" name="(SELECT  t_imsopus.OBJ_ID,t_imsstudent.XH,t_imsopus.opus,t_imsopus.typename                                             
+                                     FROM t_imsopus
+                                     join t_imsstudent on t_imsstudent.XH=t_imsopus.studentid)AS t_imsopus"
+         admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <opus text="作品"></opus>
+    <typename text="类型"></typename>
+    <XH visibility="hidden"></XH>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="opusview(this,'OBJ_ID','XH')"></span>
+    </buttons>
+  </table>
+  <table id="学生信息" name="(SELECT  t_imsstudent.OBJ_ID,t_imsstudent.XM, t_imsstudent.XBM, t_imsstudent.XH as XH,  t_imsclass1.name as classes,t_imsteacher. GH as TeacherCode,  t_imsteacher.XM as TacherName                                     
+                                     FROM t_imsstudent
+                                     left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                                     left join t_imsteacher on t_imsteacher.GH=t_imsclass1.teacherCode)AS t_imsstudents"
+         admin-role="sys" filter="TeacherCode" ignoredfilters="TeacherCode" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名" search-type="true"></XM>
+    <XBM text="性别" search-adv="true"></XBM>
+    <classes text="班级" search-type="true"></classes>
+    <XH text="学号" search-adv="true" search-type="true"></XH>
+    <TeacherCode visibility="hidden"></TeacherCode>
+    <TacherName text="班主任" search-type="true"></TacherName>
+    <buttons>
+      <span class="glyphicon glyphicon-user" title="学生简历" onclick="resumeview(this,'XH')"></span>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus" title="新增"></span>新增
+      </span>
+      <span class="rt-pager-btn" onclick="deleteConfirm('学生信息','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="您的信息" name="(SELECT  t_imsstudent.OBJ_ID,t_imsstudent.XM, t_imsstudent.XBM, t_imsstudent.XH as XH,  t_imsclass1.name as classes,t_imsteacher. GH as TeacherCode,  t_imsteacher.XM as TacherName                                     
+                                     FROM t_imsstudent
+                                     left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                                     left join t_imsteacher on t_imsteacher.GH=t_imsclass1.teacherCode)AS t_imsstudents"
+         filter="XH"  defaultorder="classes,XH">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名"></XM>
+    <XBM text="性别" search-adv="true"></XBM>
+    <classes text="班级"></classes>
+    <XH text="学号" search-adv="true"></XH>
+    <TeacherCode visibility="hidden"></TeacherCode>
+    <TacherName text="班主任"></TacherName>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+  </table>
+  <table id="学生奖励" name="(select  t_imsaward.OBJ_ID,t_imsstudent.XM,t_imsstudent.XH,t_imsclass1.name as classes,t_imsaward.name,t_imsaward.awardmoney,t_imsaward.JLXND,t_imsaward.BJDW
+                              FROM t_imsaward
+                              join t_imsstudent on t_imsstudent.XH=t_imsaward.student
+                              left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes)AS t_imsopus"
+         admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名" search-type="true"></XM>
+    <classes text="班级" search-type="true"></classes>
+    <name text="奖励名称"></name>
+    <awardmoney text="奖励金额"></awardmoney>
+    <XH visibility="hidden"></XH>
+    <JLXND text="奖励学年度" search-adv="true" search-type="true"></JLXND>
+    <BJDW text="颁奖单位" search-adv="true"></BJDW>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新增"></span>新增
+      </span>
+      <span class="rt-pager-btn" onclick="deleteConfirm('学生奖励','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="简历学生奖励" name="(select  t_imsaward.OBJ_ID,t_imsstudent.XH,t_imsaward.name,t_imsaward.awardmoney,t_imsaward.JLXND,t_imsaward.BJDW
+                              FROM t_imsaward
+                              join t_imsstudent on t_imsstudent.XH=t_imsaward.student
+                              left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes)AS t_imsopus"
+         admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <name text="奖励名称"></name>
+    <awardmoney text="奖励金额"></awardmoney>
+    <XH visibility="hidden"></XH>
+    <JLXND text="奖励学年度"></JLXND>
+    <BJDW text="颁奖单位"></BJDW>
+  </table>
+  <table id="学生成绩" name="(select  t_imsresult2.OBJ_ID,t_imsstudent.XM,t_imsstudent.XH,t_imsclass1.name as classes,t_imsresult2.KCMC,t_imsresult2.XF,t_imsresult2.XQMC,t_imsresult2.PSCJ,t_imsresult2.CJ
+                             FROM t_imsresult2
+                             join t_imsstudent on t_imsstudent.XH=t_imsresult2.student
+                             left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes)AS t_imsresult2"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名" search-type="true"></XM>
+    <XH text="学号" search-type="true"></XH>
+    <classes text="班级" search-type="true"></classes>
+    <KCMC text="课程名称" search-type="true" search-adv="true"></KCMC>
+    <XF text="学分"></XF>
+    <XQMC text="学期名称" search-type="true" search-adv="true"></XQMC>
+    <PSCJ text="平时成绩" ></PSCJ>
+    <CJ text="成绩"></CJ>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新增"></span>新增
+      </span>
+      <span class="rt-pager-btn" onclick="deleteConfirm('学生成绩','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="简历学生成绩" name="(select  t_imsresult2.OBJ_ID,t_imsstudent.XH,t_imsresult2.KCMC,t_imsresult2.XF,t_imsresult2.XQMC,t_imsresult2.PSCJ,t_imsresult2.CJ
+                             FROM t_imsresult2
+                             join t_imsstudent on t_imsstudent.XH=t_imsresult2.student
+                             left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes)AS t_imsresult2"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XH text="学号"  visibility="hidden"></XH>
+    <KCMC text="课程名称" ></KCMC>
+    <XF text="学分"></XF>
+    <XQMC text="学期名称"></XQMC>
+    <PSCJ text="平时成绩" ></PSCJ>
+    <CJ text="成绩"></CJ>
+  </table>
+  <table id="学生评语" name="(select  t_imsstudentcomment.OBJ_ID,t_imsstudent.XM,t_imsstudent.XH,t_imsclass1.name as classes,t_imsstudentcomment.name,t_imsteacher.GH as teacherCode,t_imsteacher.XM as teacherName
+                             FROM t_imsstudentcomment
+                             join t_imsstudent on t_imsstudent.XH=t_imsstudentcomment.student
+                             left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                             left join t_imsteacher on t_imsteacher.GH=t_imsstudentcomment.teacher)AS t_imsstudentcomment"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名" search-type="true"></XM>
+    <XH text="学号" search-type="true"></XH>
+    <classes text="班级" search-type="true"></classes>
+    <name text="评语名称"></name>
+    <teacherCode visibility="hidden"></teacherCode>
+    <teacherName text="老师" search-type="true" search-adv="true"></teacherName>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新增"></span>新增
+      </span>
+      <span class="rt-pager-btn" onclick="deleteConfirm('学生成绩','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="简历学生评语" name="(select  t_imsstudentcomment.OBJ_ID,t_imsstudent.XH,t_imsstudentcomment.name,t_imsstudentcomment.comments,t_imsteacher.GH as teacherCode,t_imsteacher.XM as teacherName
+                             FROM t_imsstudentcomment
+                             join t_imsstudent on t_imsstudent.XH=t_imsstudentcomment.student
+                             left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                             left join t_imsteacher on t_imsteacher.GH=t_imsstudentcomment.teacher)AS t_imsstudentcomment"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XH text="学号" visibility="hidden"></XH>
+    <name text="评语名称"></name>
+    <comments text="评语内容"></comments>
+    <teacherCode visibility="hidden"></teacherCode>
+    <teacherName text="老师" ></teacherName>
+  </table>
+  <table id="学生成本" name="(select  t_imscost.OBJ_ID,t_imsstudent.XM,t_imsstudent.XH,t_imsclass1.name as classes,t_imscost.course,t_imscost.project,t_imscost.typename,t_imscost.cost,t_imsteacher.GH as teacherCode,t_imsteacher.XM as teacherName
+                             FROM t_imscost
+                             join t_imsstudent on t_imsstudent.XH=t_imscost.student
+                             left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                             left join t_imsteacher on t_imsteacher.GH=t_imscost.teacher)AS t_imscost"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名" search-type="true"></XM>
+    <XH text="学号" search-type="true"></XH>
+    <classes text="班级" search-type="true"></classes>
+    <course text="课程" search-type="true" search-adv="true"></course>
+    <project text="项目" search-type="true" search-adv="true"></project>
+    <typename text="成本类型" search-type="true" search-adv="true"></typename>
+    <cost text="成本"></cost>
+    <teacherCode visibility="hidden"></teacherCode>
+    <teacherName text="老师"></teacherName>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新增"></span>新增
+      </span>
+      <span class="rt-pager-btn" onclick="deleteConfirm('学生成绩','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="简历学生成本" name="(select  t_imscost.OBJ_ID,t_imsstudent.XH,t_imscost.course,t_imscost.project,t_imscost.typename,t_imscost.cost
+                             FROM t_imscost
+                             join t_imsstudent on t_imsstudent.XH=t_imscost.student
+                             left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                             left join t_imsteacher on t_imsteacher.GH=t_imscost.teacher)AS t_imscost"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XH text="学号"  visibility="hidden"></XH>
+    <course text="课程"></course>
+    <project text="项目"></project>
+    <typename text="成本类型"></typename>
+    <cost text="成本"></cost>
+  </table>
+  <table id="工作经历" name="(select  t_imsworkresume.OBJ_ID,t_imsstudent.XM,t_imsstudent.XH,t_imsclass1.name as classes,t_imsworkresume.GZQSRQ,t_imsworkresume.GZZZRQ,t_imsworkresume.GZDW,t_imsworkresume.GZNR,t_imsworkresume.CRDZZW,t_imsworkresume.CRZYJSZWM,t_imsworkresume.GZZMR,t_imsworkresume.GZJLBZ
+                            FROM t_imsworkresume
+                            join t_imsstudent on t_imsstudent.XH=t_imsworkresume.student
+                            left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                            where t_imsworkresume.[type]=1)AS t_imsworkresume"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名" search-type="true"></XM>
+    <XH text="学号" search-type="true"></XH>
+    <classes text="班级" search-type="true"></classes>
+    <GZQSRQ text="工作起始日期"></GZQSRQ>
+    <GZZZRQ text="工作终止日期"></GZZZRQ>
+    <GZDW text="工作单位"></GZDW>
+    <GZNR text="工作内容"></GZNR>
+    <CRDZZW text="曾任党政职务"></CRDZZW>
+    <CRZYJSZWM text="曾任专业技术职务码"></CRZYJSZWM>
+    <GZZMR text="工作证明人"></GZZMR>
+    <GZJLBZ text="工作简历备注"></GZJLBZ>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="experienceView(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="experienceEdit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="experienceAdd()">
+        <span class="glyphicon glyphicon-plus" title="新增"></span>新增
+      </span>
+      <span class="rt-pager-btn" onclick="deleteConfirm('学生成绩','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="简历工作经历" name="(select  t_imsworkresume.OBJ_ID,t_imsstudent.XH,t_imsworkresume.GZQSRQ,t_imsworkresume.GZZZRQ,t_imsworkresume.GZDW,t_imsworkresume.GZNR 
+                            FROM t_imsworkresume
+                            join t_imsstudent on t_imsstudent.XH=t_imsworkresume.student
+                            left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                            where t_imsworkresume.[type]=1)AS t_imsworkresume"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XH text="学号" visibility="hidden"></XH>
+    <GZQSRQ text="工作起始日期"></GZQSRQ>
+    <GZZZRQ text="工作终止日期"></GZZZRQ>
+    <GZDW text="工作单位"></GZDW>
+    <GZNR text="工作内容"></GZNR>
+  </table>
+  <table id="学习经历" name="(select  t_imsworkresume.OBJ_ID,t_imsstudent.XM,t_imsstudent.XH,t_imsclass1.name as classes,t_imsworkresume.GZQSRQ,t_imsworkresume.GZZZRQ,t_imsworkresume.GZDW,t_imsworkresume.GZNR,t_imsworkresume.CRDZZW,t_imsworkresume.CRZYJSZWM,t_imsworkresume.GZZMR,t_imsworkresume.GZJLBZ
+                            FROM t_imsworkresume
+                            join t_imsstudent on t_imsstudent.XH=t_imsworkresume.student
+                            left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                            where t_imsworkresume.[type]=2)AS t_imsworkresume"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XM text="姓名" search-type="true"></XM>
+    <XH text="学号" search-type="true"></XH>
+    <classes text="班级" search-type="true"></classes>
+    <GZQSRQ text="学习起始日期"></GZQSRQ>
+    <GZZZRQ text="学习终止日期"></GZZZRQ>
+    <GZDW text="学习单位"></GZDW>
+    <GZNR text="学习内容"></GZNR>
+    <CRDZZW text="曾任党政职务"></CRDZZW>
+    <CRZYJSZWM text="曾任专业技术职务码"></CRZYJSZWM>
+    <GZZMR text="学习证明人"></GZZMR>
+    <GZJLBZ text="学习简历备注"></GZJLBZ>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="experienceView(this,'OBJ_ID','XH')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="experienceEdit(this,'OBJ_ID','XH')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="experienceAdd()">
+        <span class="glyphicon glyphicon-plus" title="新增"></span>新增
+      </span>
+      <span class="rt-pager-btn" onclick="deleteConfirm('学生成绩','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="简历学习经历" name="(select  t_imsworkresume.OBJ_ID,t_imsstudent.XH,t_imsworkresume.GZQSRQ,t_imsworkresume.GZZZRQ,t_imsworkresume.GZDW,t_imsworkresume.GZNR
+                            FROM t_imsworkresume
+                            join t_imsstudent on t_imsstudent.XH=t_imsworkresume.student
+                            left join t_imsclass1 on t_imsclass1.code=t_imsstudent.classes
+                            where t_imsworkresume.[type]=2)AS t_imsworkresume"
+       admin-role="sys,teacher" filter="XH" ignoredfilters="XH" defaultorder="XH" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XH text="学号" visibility="hidden"></XH>
+    <GZQSRQ text="学习起始日期"></GZQSRQ>
+    <GZZZRQ text="学习终止日期"></GZZZRQ>
+    <GZDW text="学习单位"></GZDW>
+    <GZNR text="学习内容"></GZNR>
+  </table>
+</tables>

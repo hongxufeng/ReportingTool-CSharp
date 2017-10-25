@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="课程管理"  filter="TeacherCode" navname="课程管理" admin-role="sys" admin-power="" checkbox="OBJ_ID" ignoredfilters="TeacherCode"
+           name="(SELECT t_imsCourseGroup.OBJ_ID,t_imsCourseGroup.Code,t_imsCourseGroup.CourseCode,t_imsCourseGroup.Name,t_imsCourseGroup.ClassName,
+                                 t_imsCourseGroup.MainTeacher,t_imsCourseGroup.GroupTeachers,t_imsCourseGroup.AllTeachers,t_imsCourseGroup.StartDate,
+                                 t_imsCourseGroup.EndDate,t_imsCourseGroupTeacher.TeacherCode,
+                                 (CAST(t_imsCourseGroup.StartDate AS nvarchar)+'~'+CAST(t_imsCourseGroup.EndDate AS nvarchar)) AS Period
+                      FROM t_imsCourseGroup,t_imsCourseGroupTeacher 
+                      WHERE t_imsCourseGroup.code=t_imsCourseGroupTeacher.CourseGroupCode) AS t_imsCourseGroup"
+           adminname="(SELECT *,(CAST(t_imsCourseGroup.StartDate AS nvarchar)+'~'+CAST(t_imsCourseGroup.EndDate AS nvarchar)) AS Period
+                              FROM t_imsCourseGroup) AS t_imsCourseGroup" defaultorder="StartDate DESC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <Code visibility="hidden"></Code>
+    <CourseCode text="课程编号" visibility="hidden"></CourseCode>
+    <Name text="课程名称" search-type="true" formatter-s=""></Name>
+    <ClassID visibility="hidden"></ClassID>
+    <ClassName text="上课班级" formatter-r="&lt;b>上课班级&lt;/b>：$$::$$" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></ClassName>
+    <TeacherID visibility="hidden"></TeacherID>
+    <TeacherCode visibility="hidden" encrypted="true"></TeacherCode>
+    <MainTeacher text="主讲教师" formatter-r="&lt;b>主讲教师&lt;/b>：$$::$$"></MainTeacher>
+    <GroupTeachers visibility="hidden" text="授课教师"></GroupTeachers>
+    <AllTeachers text="授课教师" formatter-r="&lt;b>授课教师&lt;/b>：$$::$$" search-type="true" search-adv="true" search4admin="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></AllTeachers>
+    <StartDate visibility="hidden" text="开始日期" dateformat="yyyy/MM/dd" search-type="date" search-adv="true"></StartDate>
+    <EndDate visibility="hidden" text="结束日期" dateformat="yyyy/MM/dd" search-type="date"></EndDate>
+    <Period text="日期" formatter-r="&lt;b>上课时间&lt;/b>：$$::$$"></Period>
+    <LongTime visibility="hidden"></LongTime>
+    <buttons>
+      <span class="glyphicon glyphicon-book editProjects" title="编辑课题"></span>
+      <span class="glyphicon glyphicon-th group" title="指派设备"></span>
+      <span class="glyphicon glyphicon-home viewTrainPlan" title="查看实训计划"></span>
+      <span class="glyphicon glyphicon-list-alt viewItem" title="物料清单"></span>
+    </buttons>
+  </table>
+  <table id="课表查询" filter="TeacherCode" admin-role="sys" ignoredfilters="TeacherCode"
+           name="(SELECT t_imssetion.OBJ_ID,t_imssetion.code,t_imssetion.CourseGroupCode,t_imssetion.subjects,t_imssetion.classes,t_imssetion.teacher,t_imsCourseGroup.GroupTeachers,
+                                 t_imssetion.startdate,t_imssetion.StartTime,t_imssetion.EndTime,t_imssetion.[length],t_imsCourseGroupTeacher.TeacherCode,
+                                 (CAST(t_imssetion.StartTime AS nvarchar)+' ~ '+CAST(t_imssetion.EndTime AS nvarchar)) AS Period
+                      FROM t_imssetion INNER JOIN t_imsCourseGroupTeacher ON t_imssetion.CourseGroupCode = t_imsCourseGroupTeacher.CourseGroupCode
+                      INNER JOIN t_imsCourseGroup ON t_imssetion.CourseGroupCode = t_imsCourseGroup.Code) AS t_imssetion"
+           adminname="(SELECT t_imssetion.OBJ_ID,t_imssetion.code,t_imssetion.CourseGroupCode,t_imssetion.subjects,t_imssetion.classes,t_imssetion.teacher,
+                                         t_imsCourseGroup.GroupTeachers,t_imssetion.startdate,t_imssetion.StartTime,t_imssetion.EndTime,t_imssetion.[length],
+                                         (CAST(t_imssetion.StartTime AS nvarchar)+' ~ '+CAST(t_imssetion.EndTime AS nvarchar)) AS Period
+                              FROM t_imssetion,t_imsCourseGroup
+                              WHERE t_imssetion.CourseGroupCode = t_imsCourseGroup.Code) AS t_imssetion" defaultorder="startdate DESC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code visibility="hidden"></code>
+    <CourseGroupCode visibility="hidden"></CourseGroupCode>
+    <subjects text="课程名称" search-type="true"></subjects>
+    <classes text="上课班级" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></classes>
+    <TeacherID visibility="hidden" encrypted="true"></TeacherID>
+    <TeacherCode visibility="hidden" encrypted="true"></TeacherCode>
+    <teacher text="主讲教师"></teacher>
+    <GroupTeachers text="授课教师" search-type="true" search-adv="true" search4admin="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></GroupTeachers>
+    <startdate text="上课日期" search-type="date" dateformat="yyyy-MM-dd"></startdate>
+    <StartTime visibility="hidden" text="开始时间" search-type="range" search-adv="true"></StartTime>
+    <EndTime visibility="hidden" text="结束时间" search-type="range" search-adv="true"></EndTime>
+    <Period text="上课时间"></Period>
+    <length visibility="hidden"></length>
+    <buttons>
+      <span class="glyphicon glyphicon-bell startLesson" title="上课"></span>
+      <!--<span class="glyphicon glyphicon-trash deleteSetion" title="删除"></span>-->
+    </buttons>
+  </table>
+  <table id="考勤统计" filter="TeacherCode" admin-role="sys" ignoredfilters="TeacherCode"
+           name="(SELECT t_imscoursechedule.OBJ_ID,t_imscoursechedule.code AS CourseCode,t_imscoursechedule.name,t_imscoursechedule.classes,
+                                  t_imscoursechedule.teacher,t_imscoursechedule.startDate,t_imscoursechedule.endDate,
+                                 (CAST(t_imscoursechedule.startDate AS nvarchar)+' 至 '+CAST(t_imscoursechedule.endDate AS nvarchar)) AS Period,
+                                 t_imsCourseGroupTeacher.TeacherCode
+                      FROM t_imscoursechedule,t_imsCourseGroupTeacher
+                      WHERE t_imscoursechedule.code = t_imsCourseGroupTeacher.CourseCode) AS t_imscoursechedule"
+           adminname="(SELECT t_imscoursechedule.OBJ_ID,t_imscoursechedule.code AS CourseCode,t_imscoursechedule.name,t_imscoursechedule.classes,
+                                         t_imscoursechedule.teacher,t_imscoursechedule.startDate,t_imscoursechedule.endDate,
+                                        (CAST(t_imscoursechedule.startDate AS nvarchar)+' 至 '+CAST(t_imscoursechedule.endDate AS nvarchar)) AS Period
+                              FROM t_imscoursechedule) AS t_imscoursechedule">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <CourseCode text="课程编号" search-type="true" search-adv="true"></CourseCode>
+    <name text="课程名称" search-type="true"></name>
+    <classes text="上课班级" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></classes>
+    <teacher text="授课教师" search-type="true" search-adv="true" search4admin="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></teacher>
+    <TeacherCode visibility="hidden" encrypted="true"></TeacherCode>
+    <startDate visibility="hidden" text="开始日期" dateformat="yyyy-MM-dd" search-type="date" search-adv="true"></startDate>
+    <endDate visibility="hidden" text="结束日期" dateformat="yyyy-MM-dd" search-type="date" search-adv="true"></endDate>
+    <Period text="日期"></Period>
+    <buttons>
+      <span linkto="考勤详情" passedcol="CourseCode" navname="name">查看</span>
+    </buttons>
+  </table>
+  <table id="考勤详情" name="ims_statKQCourseDetailsF" filter="CourseCode" exec-before="ims_statKQCourseDetailsView(CourseCode)" cols-perpage="3" cols-dynamic="5">
+    <CourseCode visibility="hidden"></CourseCode>
+    <XM text="姓名" search-type="true"></XM>
+    <XH text="学号" search-type="true"></XH>
+  </table>
+  <table id="成绩下载" admin-role="sys" name="(SELECT OBJ_ID,XH,XM,classes FROM t_imsstudent) AS t_imsstudent" defaultorder="XH ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XH text="学号" search-type="true"></XH>
+    <XM text="姓名" search-type="true"></XM>
+    <classes text="所属班级" search-type="true" search-adv="true"></classes>
+    <buttons>
+      <span class="glyphicon glyphicon-download-alt" title="下载PDF评分表" onclick="downloadPDF(this)"></span>
+    </buttons>
+  </table>
+  <table id="学生课表查询" filter="XH" admin-role="sys" ignoredfilters="XH"
+           name="(SELECT t_imssetion.OBJ_ID,t_imssetion.code,t_imssetion.CourseGroupCode,t_imssetion.subjects,t_imssetion.classes,t_imssetion.teacher,
+                                 t_imssetion.startdate,t_imssetion.StartTime,t_imssetion.EndTime,t_imssetion.[length],
+                                 (CAST(t_imssetion.StartTime AS nvarchar)+' ~ '+CAST(t_imssetion.EndTime AS nvarchar)) AS Period,t_imsbiggroup.stuno AS XH
+                      FROM t_imssetion,t_imsbiggroup
+                      WHERE t_imssetion.CourseGroupCode=t_imsbiggroup.CourseGroupCode) AS t_imssetion"
+           adminname="(SELECT t_imssetion.OBJ_ID,t_imssetion.code,t_imssetion.CourseGroupCode,t_imssetion.subjects,t_imssetion.classes,t_imssetion.teacher,
+                                         t_imssetion.startdate,t_imssetion.StartTime,t_imssetion.EndTime,t_imssetion.[length],
+                                         (CAST(t_imssetion.StartTime AS nvarchar)+' ~ '+CAST(t_imssetion.EndTime AS nvarchar)) AS Period
+                              FROM t_imssetion) AS t_imssetion" defaultorder="startdate DESC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code visibility="hidden"></code>
+    <CourseGroupCode visibility="hidden"></CourseGroupCode>
+    <subjects text="课程名称" search-type="true"></subjects>
+    <classes text="上课班级" search-type="true" search4admin="true"></classes>
+    <XH visibility="hidden" encrypted="true"></XH>
+    <teacher text="授课教师" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></teacher>
+    <startdate text="上课日期" search-type="date" dateformat="yyyy-MM-dd"></startdate>
+    <StartTime visibility="hidden" text="开始时间" search-type="range" search-adv="true"></StartTime>
+    <EndTime visibility="hidden" text="结束时间" search-type="range" search-adv="true"></EndTime>
+    <Period text="上课时间"></Period>
+    <length visibility="hidden"></length>
+    <buttons>
+      <span class="glyphicon glyphicon-bell startLesson" title="上课"></span>
+      <!--<span class="glyphicon glyphicon-trash deleteSetion" title="删除"></span>-->
+    </buttons>
+  </table>
+</tables>

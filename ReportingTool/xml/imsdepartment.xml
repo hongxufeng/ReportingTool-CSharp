@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="授课维护" name="t_imsdepartment"
+         admin-role="sys" defaultorder="code DESC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号"></code>
+    <name text="名称"></name>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑课程" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>      
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建课程"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('授课维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除课程"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('授课维护表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+</tables>

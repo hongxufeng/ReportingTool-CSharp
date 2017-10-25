@@ -1,0 +1,78 @@
+﻿#header{margin-bottom:28px}
+#col-left{float:left;width:20%;}
+#col-right{float:left;margin-left:60px;width:72%;}
+/*list*/
+#rt-list-header{font-size:14.5px;font-weight:bold;margin:0px 0px 0px 40px;}
+#rt-list{font-size:14.5px;margin:18px 0px 0px 40px;}
+#rt-list li{cursor:pointer;}
+/*tab*/
+.rt-tab {list-style: outside none none;margin-bottom: 0;padding-left: 0; height: 41px; background-color: aliceblue;list-style: outside none none;}
+.rt-tab > li {display: block;position: relative;
+    float: left;
+    margin-bottom: -1px;
+}
+.rt-tab > li.active > span, .rt-tab > li.active > span:hover, .rt-tab > li.active > span:focus {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #fff;
+    border-color: #ddd #ddd transparent;
+    border-image: none;
+    border-style: solid;
+    border-width:2px 0px 0px 0px !important;
+    color: #555;
+    cursor: default;
+    border-top-color:#528B8B !important;
+}
+.rt-tab > li > span {display: block;padding: 10px 15px;position: relative;cursor:pointer}
+/*searchBar*/
+.rt-searchBar{background-color:rgba(0,0,0,0.8);background-color:rgb(0,0,0)\9;filter:alpha(opacity=80);border:1px solid #555555;border-radius:0px 4px 4px 0px;width:270px;padding:12px 20px 16px 20px;position:fixed;top:176px;left:-300px;z-index:1;-webkit-transition:all 300ms ease;-moz-transition:all 300ms ease;-o-transition:all 300ms ease;-ms-transition:all 300ms ease;transition:all 300ms ease;}
+.rt-searchBar-shown{left:0px;-webkit-transition:all 300ms ease;-moz-transition:all 300ms ease;-o-transition:all 300ms ease;-ms-transition:all 300ms ease;transition:all 300ms ease;}
+.rt-search{color:#FFFFFF;margin-bottom:14px;}
+.rt-search>div{color:#FFFFFF;}
+.rt-search>div>span{color:#FFFFFF;}
+.rt-search div{margin:5px 0px;position:relative;}
+.rt-search input{color:#333333;}
+.rt-search .glyphicon{color:#444444;cursor:pointer;position:absolute;top:31px;right:5px;}
+.rt-search-txt,.search-txt-btn{width:98%;}
+.rt-search-txt.sbtn{padding-right:22px;}
+.rt-search-txt.range{width:44%;}
+.rt-search-txt.date{width:44%;}
+.search-span-minus{padding:0px 4px;}
+.rt-btn-clean,.rt-btn-search{margin-top:10px;letter-spacing:2px;width:44%;}
+.rt-btn-clean{margin-right:3%}
+.rt-btn-search{margin-left:3%}
+.rt-btn-hideSb{color:#FFFFFF;cursor:pointer;position:absolute;top:10px;right:10px}
+/*table*/
+.table.table-condensed{}
+.rt-table>.table{border:1px solid #DDDDDD;border-radius:2px;padding:0;position:relative;}
+.table{margin-bottom:0px;border-bottom:1px solid #DDDDDD;}
+.table-striped>tbody>tr:nth-of-type(odd){background-color:#FFFFFF;}
+tbody{background-color:#FFFFFF;}
+.rt-table th,.rt-table td{text-align:center !important;}
+.rt-table td{vertical-align:middle !important;}
+.rt-table th{border-right:1px solid #FFFFFF;background-color:lightskyblue;color:#FFFFFF;font-weight:normal;padding:7px 12px 6px 12px;cursor:pointer;}
+td .glyphicon{cursor:pointer;}
+table [data-table]{color:#337AB7;font-weight:bold;cursor:pointer;}
+.hiddenCol{display:none;}
+.rt-tr-onhover{background-color:#E1F1FF}
+.rt-tr-selected{background-color:#E1F1FF}
+[name=操作]>span{margin:0px 5px;}
+/*table-pager*/
+.rt-pager-container{border:1px solid #DDDDDD;border-top-width:0px;text-align:center;padding:5px 2px;width:100%;}
+.rt-pager-buttons{float:left;margin:4px 0px 0px 10px;}
+.rt-pager-controls{display:inline;margin:0 auto;}
+.rt-pager-controls>.glyphicon{padding:6px;}
+.rt-pager-controls>.glyphicon:hover{background-color:#E5E5E5}
+.rt-pager-page{width:32px;text-align:center;}
+.rt-pager-records{float:right;padding:3px 10px 0px 0px;}
+.rt-pager-container .rt-pager-btn{cursor:pointer;padding:5px;}
+.rt-pager-container .rt-pager-btn:hover{background-color:#E5E5E5;}
+.pager-separator{border:1px solid #D3D3D3;margin:0px 4px;}
+.rt-pager-btn .glyphicon{padding-right:4px;}
+/*colPager*/
+.rt-colPager-container{position:relative;}
+.rt-colPager-prev{position:absolute;top:13px;left:-16px;cursor:pointer;z-index:1;}
+.rt-colPager-next{position:absolute;top:13px;right:-16px;cursor:pointer;z-index:1;}
+.table-condensed>tbody>tr>td{ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:250px;}

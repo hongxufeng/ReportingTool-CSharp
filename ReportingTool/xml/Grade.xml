@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="课程概况" name="ims_statCourse" adminname="ims_statCourse4Admin" filter="TeacherCode" ignoredfilters="TeacherCode" admin-role="sys" defaultorder="startDate DESC" excel="true">
+    <OBJ_ID visibility="hidden" export2excel="false"></OBJ_ID>
+    <CourseCode text="编号" search-type="true"></CourseCode>
+    <name text="名称" search-type="true"></name>
+    <classes text="班级" linkto="班级概况" passedcol="CourseCode" navname="name" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})" search-type="true"></classes>
+    <teacher text="教师" search4admin="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})" search-type="true"></teacher>
+    <startDate text="开始日期" search-type="date" visibility="hidden" search-adv="true"></startDate>
+    <endDate text="结束日期" search-type="date" visibility="hidden" search-adv="true"></endDate>
+    <Period text="日期" export2excel="false"></Period>
+    <AvgProjectScore text="课题均分" search-type="range" precision="0.0" linkto="课题统计" ignoredpassedcol="TeacherCode" passedcol="CourseCode,TeacherCode" navname="name" search-adv="true"></AvgProjectScore>
+    <AvgFinalScore text="期末成绩" search-type="range" precision="0.0" search-adv="true"></AvgFinalScore>
+    <AvgKqScore text="考勤均分" search-type="range" precision="0.0" search-adv="true"></AvgKqScore>
+    <AvgCourseScore text="总评均分" search-type="range" precision="0.0" search-adv="true"></AvgCourseScore>
+    <KqRate text="出勤率" search-type="range" precision="0.00" percentageform="true" regex-pattern="-1.0" regex-replacement="" linkto="考勤详情" passedcol="CourseCode" navname="name" search-adv="true"></KqRate><!--现在不点名的小课默认全员出勤-->
+    <PassRate text="通过率" search-type="range" precision="0.00" percentageform="true" regex-pattern="-1.0" regex-replacement="" search-adv="true"></PassRate>
+    <AceRate text="优秀率" search-type="range" precision="0.00" percentageform="true" regex-pattern="-1.0" regex-replacement="" search-adv="true"></AceRate>
+    <TeacherCode visibility="hidden" encrypted="true" export2excel="false"></TeacherCode>
+  </table>
+  <table id="课题统计" name="ims_statProjectF" adminname="ims_statProjectAdmin" admin-role="sys" filter="CourseCode,TeacherCode" ignoredfilters="TeacherCode" visibility="hidden" defaultorder="CourseCode ASC,Name ASC" excel="true">
+    <CourseCode visibility="hidden" export2excel="false"></CourseCode>
+    <PaperCode visibility="hidden" export2excel="false"></PaperCode>
+    <Name text="课题" linkto="课题详情" passedcol="CourseGroupCode,PaperCode" navname="Name" search-type="true"></Name>
+    <PaperType visibility="hidden" text="类型"></PaperType>
+    <CourseGroupCode visibility="hidden" export2excel="false"></CourseGroupCode>
+    <classes text="班级" linkto="班级详情" passedcol="CourseGroupCode,PaperCode" navname="classes"></classes>
+    <TeacherCode visibility="hidden" export2excel="false"></TeacherCode>
+    <XM text="教师"></XM>
+    <ProjAvg text="平均分" search-type="range" precision="0.0"></ProjAvg>
+    <ProjMax text="最高分" search-type="range" precision="0.0"></ProjMax>
+    <ProjMin text="最低分" search-type="range" precision="0.0"></ProjMin>
+    <TotalPoints visibility="hidden" export2excel="false"></TotalPoints>
+    <PassRate text="通过率" search-type="range" precision="0.00" percentageform="true" regex-pattern="-1.0" regex-replacement=""></PassRate>
+    <AceRate text="优秀率" search-type="range" precision="0.00" percentageform="true" regex-pattern="-1.0" regex-replacement=""></AceRate>
+  </table>
+  <table id="班级概况" admin-role="sys" name="ims_statCourseDetails" filter="CourseCode" exec-before="ims_statCourseDetailsView(CourseCode)" cols-perpage="2" cols-dynamic="5" excel="true">
+    <CourseCode visibility="hidden" export2excel="false"></CourseCode>
+    <Examinee visibility="hidden" export2excel="false"></Examinee>
+    <XM text="姓名" search-type="true"></XM>
+    <AvgProjectScore text="课题均分" precision="0.0" search-type="range"></AvgProjectScore>
+    <AvgFinalScore text="期末" precision="0.0" search-type="range"></AvgFinalScore>
+    <AvgKqScore text="考勤" precision="0.0" search-type="range" search-adv="true"></AvgKqScore>
+    <Score text="总评" precision="0.0" search-type="range"></Score>
+  </table>
+  <table id="考勤详情" name="ims_statKQCourseDetailsF" filter="CourseCode" exec-before="ims_statKQCourseDetailsView(CourseCode)" cols-perpage="3" cols-dynamic="5" excel="true">
+    <CourseCode visibility="hidden" export2excel="false"></CourseCode>
+    <XM text="姓名" search-type="true"></XM>
+    <XH text="学号" search-type="true"></XH>
+  </table>
+  <table id="课题详情" admin-role="sys" name="ims_statMarksheet" filter="CourseGroupCode,PaperCode" defaultorder="No ASC" excel="true">
+    <CourseGroupCode visibility="hidden" export2excel="false"></CourseGroupCode>
+    <PaperCode visibility="hidden" export2excel="false"></PaperCode>
+    <ItemID visibility="hidden" export2excel="false"></ItemID>
+    <No text="编号"></No>
+    <Name text="考核内容" search-type="true"></Name>
+    <Criterion text="评分标准" search-type="true"></Criterion>
+    <FullMarks search-type="range" text="满分人数"></FullMarks>
+    <LostMarks search-type="range" text="失分人数"></LostMarks>
+    <FullMarkStds text="满分学生"></FullMarkStds>
+    <LostMarkStds text="失分学生"></LostMarkStds>
+  </table>
+  <table id="班级详情" admin-role="sys" name="ims_statStdProjectDetail" filter="CourseGroupCode,PaperCode" visibility="hidden" defaultorder="SbjScore DESC,Examinee ASC" excel="true">
+    <CourseCode visibility="hidden" export2excel="false"></CourseCode>
+    <CourseGroupCode visibility="hidden" export2excel="false"></CourseGroupCode>
+    <PaperCode visibility="hidden" export2excel="false"></PaperCode>
+    <Name text="课题"></Name>
+    <MyPaperID visibility="hidden" export2excel="false"></MyPaperID>
+    <PaperType visibility="hidden" export2excel="false"></PaperType>
+    <Examinee visibility="hidden" export2excel="false"></Examinee>
+    <XM text="姓名" search-type="true"></XM>
+    <ProjectNo visibility="hidden" export2excel="false"></ProjectNo>
+    <SbjScore text="得分" search-type="range" recision="0.0" regex-pattern="-1.0|-1" regex-replacement="" linkto="试卷详情" passedcol="MyPaperID" navname="XM"></SbjScore>
+  </table>
+  <table id="试卷详情" name="ims_statStdMarksheet" filter="MyPaperID" defaultorder="No ASC" excel="true">
+    <MyPaperID visibility="hidden" export2excel="false"></MyPaperID>
+    <No text="编号"></No>
+    <Name text="考核内容"></Name>
+    <Criterion text="评分标准"></Criterion>
+    <TotalPoint text="本项分数"></TotalPoint>
+    <Point text="实际得分"></Point>
+    <Comment text="批注"></Comment>
+  </table>
+</tables>

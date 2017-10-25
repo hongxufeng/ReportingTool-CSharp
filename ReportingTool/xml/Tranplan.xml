@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  
+  <table id="实训计划"  filter="TeacherCode" navname="实训计划" admin-role="sys" admin-power="" checkbox="OBJ_ID" ignoredfilters="TeacherCode"
+           name="(select n.OBJ_ID,n.code,coursegroupcode=p.Code,p.Name,n.ttype, p.ClassName,p.GroupTeachers, p.StartDate,p.EndDate,p.LongTime, alongtime = n.longtime,n.trainroom,t.TeacherCode,n.startMoment,n.endMoment from t_imsCourseGroup p , t_imstrainmaster n,  t_imsCourseGroupTeacher t WHERE p.CourseCode=n.code and p.code=t.CourseGroupCode) AS t_imsCourseGroup"
+           adminname="(select n.OBJ_ID,n.code,coursegroupcode=p.Code,p.Name,n.ttype, p.ClassName,p.GroupTeachers, p.StartDate,p.EndDate,p.LongTime, alongtime = n.longtime,n.trainroom,t.TeacherCode,n.startMoment,n.endMoment from t_imsCourseGroup p , t_imstrainmaster n,  t_imsCourseGroupTeacher t WHERE p.CourseCode=n.code and p.code=t.CourseGroupCode) AS t_imsCourseGroup" defaultorder="StartDate DESC" excel="true">
+    <OBJ_ID visibility="hidden" export2excel="false"></OBJ_ID>
+    <coursegroupcode visibility="hidden" export2excel="false"></coursegroupcode>
+    <code text="课程编号" visibility="hidden"></code>
+    <Name text="课程名称" search-type="true"></Name>
+    <ttype text="实训类型" search-type="true"></ttype>
+    <ClassName text="上课班级" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></ClassName>
+    <TeacherCode visibility="hidden" encrypted="true" export2excel="false"></TeacherCode>
+    <GroupTeachers  text="授课教师"></GroupTeachers>
+    <StartDate  text="开始日期" dateformat="yyyy/MM/dd" search-type="date" search-adv="true"></StartDate>
+    <EndDate  text="结束日期" dateformat="yyyy/MM/dd" search-type="date"></EndDate>
+    <LongTime  text="计划课时（小时）"></LongTime>
+	<alongtime  text="课时"></alongtime>
+	<trainroom  text="实训室"></trainroom>
+	<startMoment  text="开始时间" visibility="hidden"></startMoment>
+	<endMoment text="结束时间" visibility="hidden"></endMoment>
+	
+	
+    <buttons>
+      <span class="glyphicon glyphicon-edit edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-th group" title="指派设备" onclick="group(this)"></span>
+      <span class="glyphicon glyphicon-home viewCourse" title="查看课程" onclick="viewCourse(this)"></span>
+      <span class="glyphicon glyphicon-list-alt viewItem" title="物料清单" onclick="viewItem(this)"></span>
+	  <span class="glyphicon glyphicon-record planDetail" title="计划明细" onclick="planDetail(this)"></span>
+	  <span class="glyphicon glyphicon-hd-video deviceDetail" title="设备明细" onclick="deviceDetail(this)"></span>
+    </buttons>
+	<pagerbuttons>      
+      <span class="rt-pager-btn" onclick="neworder()">
+        <span class="glyphicon glyphicon-plus" title="新建课程"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="Deletelist()">
+        <span class="glyphicon glyphicon-trash" title="删除课程"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcelForTranplan()">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="实训申请"  filter="TeacherCode" navname="实训申请" admin-role="sys" admin-power="" checkbox="OBJ_ID" ignoredfilters="TeacherCode"
+         name="(select OBJ_ID,IntrainingCode,ttype,CourseGroupCode,name,teacher,trainroom,TeacherCode,classes,starttraindate,endtraindate,submituser,Submittime,issubmit,approvaluser,approvaldate,isapproval from t_imsintraining where issubmit ='未提交' or isapproval != '未审核')) AS t_imsintraining"
+         adminname="(select OBJ_ID,IntrainingCode,ttype,CourseGroupCode,name,teacher,trainroom,TeacherCode,classes,starttraindate,endtraindate,submituser,Submittime,issubmit,approvaluser,approvaldate,isapproval from t_imsintraining where issubmit ='未提交' or isapproval != '未审核') AS t_imsintraining" defaultorder="starttraindate DESC" excel="true">
+    <OBJ_ID visibility="hidden" export2excel="false"></OBJ_ID>
+    <TeacherCode visibility="hidden" export2excel="false"></TeacherCode>
+    <IntrainingCode visibility="hidden" export2excel="false"></IntrainingCode>
+    <CourseGroupCode visibility="hidden" export2excel="false"></CourseGroupCode>
+    <ttype text="实训类型"></ttype>
+    <name text="课程名称" search-type="true"></name>
+    <teacher text="实训老师" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></teacher>
+    <trainroom text="实训室" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'room',_this:this})"></trainroom>
+    <classes text="班级" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></classes>
+    <starttraindate  text="开始日期"  search-type="date" search-adv="true"></starttraindate>
+    <endtraindate  text="结束日期"  search-type="date"></endtraindate>
+    <submituser  text="申请人"></submituser>
+    <Submittime  text="提交时间" dateformat="yyyy/MM/dd"></Submittime>
+    <issubmit  text="提交状态"></issubmit>
+    <approvaluser  text="审核人"></approvaluser>
+    <approvaldate  text="审核时间"></approvaldate>
+    <isapproval  text="审核状态"></isapproval>
+    <buttons>
+      <span class="glyphicon glyphicon-edit view " title="浏览" onclick="view(this)"></span>
+      <span class="glyphicon glyphicon-home viewCourse" title="查看课表" onclick="viewCourse(this)"></span>
+      <span class="glyphicon glyphicon-hd-video deviceDetail" title="设备明细" onclick="deviceDetail(this)"></span>
+      <span class="glyphicon glyphicon-edit edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-edit delete" title="删除" onclick="imgclick(this)"></span>
+      <span class="glyphicon glyphicon-edit agree" title="批准申请" onclick="getover(this,'Approvalok')"></span>
+      <span class="glyphicon glyphicon-edit refuse" title="驳回申请" onclick="getover(this,'Approvalno')"></span>
+      <span class="glyphicon glyphicon-edit submit $$:issubmit:$$" title="提交" onclick="submititem(this)"></span>
+      <span class="glyphicon glyphicon-th group $$:isapproval:$$" title="指派设备" onclick="group(this)"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="neworder();return false;">
+        <span class="glyphicon glyphicon-plus" title="填写申请"></span>填写申请
+      </span>
+      <span class="rt-pager-btn" onclick="submitlist();return false;">
+        <span class="glyphicon glyphicon-import" title="批量提交"></span>批量提交
+      </span>
+      <span class="rt-pager-btn" onclick="Deletelist();return false;">
+        <span class="glyphicon glyphicon-trash" title="批量删除"></span>批量删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcelForIntraining()">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>批量导入
+      </span>
+    </pagerbuttons>
+  
+  
+  </table>
+  <table id="实训审核"  filter="TeacherCode" navname="实训审核" admin-role="sys" admin-power="" checkbox="OBJ_ID" ignoredfilters="TeacherCode"
+        name="(select OBJ_ID,IntrainingCode,ttype,CourseGroupCode,name,teacher,trainroom,TeacherCode,classes,starttraindate,endtraindate,submituser,Submittime,issubmit,approvaluser,approvaldate,isapproval from t_imsintraining where issubmit = '提交'and isapproval!='批准') AS t_imsintraining"
+        adminname="(select OBJ_ID,IntrainingCode,ttype,CourseGroupCode,name,teacher,trainroom,TeacherCode,classes,starttraindate,endtraindate,submituser,Submittime,issubmit,approvaluser,approvaldate,isapproval from t_imsintraining where issubmit = '提交' and isapproval!='批准') AS t_imsintraining" defaultorder="starttraindate DESC" excel="true">
+    <OBJ_ID visibility="hidden" export2excel="false"></OBJ_ID>
+    <TeacherCode visibility="hidden" export2excel="false"></TeacherCode>
+    <IntrainingCode visibility="hidden" export2excel="false"></IntrainingCode>
+    <CourseGroupCode visibility="hidden" export2excel="false"></CourseGroupCode>
+    <ttype text="实训类型"></ttype>
+    <name text="课程名称" search-type="true"></name>
+    <teacher text="实训老师" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></teacher>
+    <trainroom text="实训室" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'room',_this:this})"></trainroom>
+    <classes text="班级" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></classes>
+    <starttraindate  text="开始日期"  search-type="date" search-adv="true"></starttraindate>
+    <endtraindate  text="结束日期"  search-type="date"></endtraindate>
+    <submituser  text="申请人"></submituser>
+    <Submittime  text="提交时间" dateformat="yyyy/MM/dd"></Submittime>
+    <issubmit  text="提交状态"></issubmit>
+    <approvaluser  text="审核人"></approvaluser>
+    <approvaldate  text="审核时间"></approvaldate>
+    <isapproval  text="审核状态"></isapproval>
+    <buttons>
+      <span class="glyphicon glyphicon-edit view" title="浏览" onclick="view(this)"></span>
+      <span class="glyphicon glyphicon-home viewCourse" title="查看课表" onclick="viewCourse(this)"></span>
+      <span class="glyphicon glyphicon-hd-video deviceDetail" title="设备明细" onclick="deviceDetail(this)"></span>
+      <span class="glyphicon glyphicon-edit edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-edit delete" title="删除" onclick="imgclick(this)"></span>
+      <span class="glyphicon glyphicon-edit agree" title="批准申请" onclick="getover(this,'Approvalok')"></span>
+      <span class="glyphicon glyphicon-edit refuse" title="驳回申请" onclick="getover(this,'Approvalno')"></span>
+      <span class="glyphicon glyphicon-edit submit " title="提交" onclick="submititem(this)"></span>
+      <span class="glyphicon glyphicon-th group " title="指派设备" onclick="group(this)"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="approvallist();return false;">
+        <span class="glyphicon glyphicon-import" title="批量审核"></span>批量审核
+      </span>
+      <span class="rt-pager-btn" onclick="approvalnolist();return false;">
+        <span class="glyphicon glyphicon-trash" title="批量驳回"></span>批量驳回
+      </span>     
+    </pagerbuttons>
+
+
+  </table>
+</tables>

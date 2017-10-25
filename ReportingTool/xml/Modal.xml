@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="teacher" name="(SELECT OBJ_ID,GH AS code,XM AS name FROM t_imsteacher) AS t_imsteacher" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="员工号" search-type="true"></code>
+    <name text="教师姓名" search-type="true"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="student" name="(SELECT OBJ_ID,XH AS code,XM AS name,classes FROM t_imsstudent) AS t_imsstudent" defaultorder="code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="学号" search-type="true"></code>
+    <name text="学生姓名" search-type="true"></name>
+    <classes text="班级" search-type="true" search-adv="true"></classes>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="classes" name="(SELECT OBJ_ID,code,name,studentnumber,grade,special FROM t_imsclass1) AS t_imsclass1" defaultorder="grade DESC,special DESC,name">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code visibility="hidden"></code>
+    <name text="班级" search-type="true"></name>
+    <studentnumber text="人数" search-type="true" search-adv="true"></studentnumber>
+    <grade text="年级" search-type="true" search-adv="true"></grade>
+    <special text="专业" search-type="true"></special>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="subject" name="(SELECT OBJ_ID,code,name FROM t_imssubject) AS t_imssubject" defaultorder="code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="special" name="(SELECT OBJ_ID,code,name FROM t_imsspecial) AS t_imsspecial" defaultorder="code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="room" name="(SELECT OBJ_ID,code,name FROM t_imsroom) AS t_imsroom" defaultorder="code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="assignStudent" name="(SELECT t_imsbiggroup.stuno,t_imsstudent.xm,t.deviceNo,t_imsbiggroup.classname,t_imsbiggroup.groupname,t_imsbiggroup.CourseGroupCode
+                                                 FROM t_imsbiggroup LEFT OUTER JOIN (SELECT t_imsgroup.groupname AS deviceNo,t_imsgroupLink.stuno,t_imsgroup.CourseGroupCode
+                                                                                                      FROM  t_imsgroup INNER JOIN t_imsgroupLink ON t_imsgroup.OBJ_ID = t_imsgroupLink.groupID) AS t 
+                                                 ON t_imsbiggroup.CourseGroupCode = t.CourseGroupCode AND t_imsbiggroup.stuno=t.stuno 
+                                                 INNER JOIN t_imsstudent ON t_imsbiggroup.stuno = t_imsstudent.xh) AS t_imsdg"
+            filter="CourseGroupCode" defaultorder="stuno ASC" checkbox="stuno">
+    <stuno text="学号" search-type="true"></stuno>
+    <xm text="姓名" search-type="true"></xm>
+    <deviceNo text="所在设备" search-type="true" search-adv="true"></deviceNo>
+    <classname text="班级" search-type="true" search-adv="true"></classname>
+    <groupname text="组别" search-type="true" search-adv="true"></groupname>
+    <CourseGroupCode visibility="hidden"></CourseGroupCode>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="addToDevice()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="marksheet" name="(SELECT OBJ_ID,Code AS code,Name AS name FROM T_ExMarkSheets WHERE Code != '00000000-0000-0000-0000-000000000000') AS T_ExMarkSheets" defaultorder="code ASC" filter="CourseCode">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="评分表编号" search-type="true"></code>
+    <name text="评分表名称" search-type="true"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="department" name="(SELECT OBJ_ID,code,name,description FROM t_imsdepartment) AS t_imsdepartment" defaultorder="code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <description text="描述" search-type="true" search-adv="true"></description>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="grade" name="(SELECT OBJ_ID,code,name FROM t_imsgrade) AS t_imsgrade" defaultorder="code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="trainingcenter" name="(SELECT OBJ_ID,code,name FROM t_imstriancenter) AS t_imstriancenter" defaultorder="code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="course" name="(SELECT OBJ_ID,code,name FROM t_imscourse) AS t_imscourse" defaultorder="code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="standardlibrary" name="(SELECT OBJ_ID,simpletext,standardtext AS name FROM t_imsstandardlibrary) AS t_imsstandardlibrary" defaultorder="OBJ_ID ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <simpletext text="标准评语" search-type="true"></simpletext>
+    <name visibility="hidden"></name>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+</tables>

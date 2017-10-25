@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="实训记录"  filter="TeacherCode" navname="实训记录" admin-role="sys" admin-power="" checkbox="OBJ_ID" ignoredfilters="TeacherCode"
+           name="(select OBJ_ID,code,ttype,trainroom,classes,name,TeacherCode,teacher,starttraindate,endtraindate,studentnumber,realstudentnumber,approvaluser,approvaldate from t_imsintraining ) AS t_imsintraining"
+           adminname="(select OBJ_ID,code,ttype,trainroom,classes,name,TeacherCode,teacher,starttraindate,endtraindate,studentnumber,realstudentnumber,approvaluser,approvaldate from t_imsintraining ) AS t_imsintraining" defaultorder="OBJ_ID DESC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="单据号" visibility="hidden"></code>
+    <ttype text="实训类型" search-type="true"></ttype>
+    <trainroom text="实训室" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'room',_this:this})"></trainroom>
+    <TeacherCode visibility="hidden" encrypted="true"></TeacherCode>
+    <classes  text="班级"></classes>
+    <name  text="项目名称"></name>
+    <teacher  text="指导老师"></teacher>
+    <starttraindate  text="开始时间" dateformat="yyyy/MM/dd" search-type="date" search-adv="true"></starttraindate>
+    <endtraindate  text="结束时间" dateformat="yyyy/MM/dd" search-type="date"></endtraindate>
+    <studentnumber  text="应到人数"></studentnumber>
+    <realstudentnumber  text="实到人数"></realstudentnumber>
+    <approvaluser  text="审核人"></approvaluser>
+    <approvaldate  text="审核时间"></approvaldate>
+
+    <buttons>
+      <span class="glyphicon glyphicon-edit edit" title="编辑" onclick="edit(this)"></span>
+      <span class="glyphicon glyphicon-home view" title="查看" onclick="view(this)"></span>
+    </buttons>
+  </table>
+  <table id="实训统计"  filter="TeacherCode" navname="实训统计" admin-role="sys" admin-power="" ignoredfilters="TeacherCode"
+           name="(select t.code,name,course,teacher,classes,startDate,endDate,(case when studentnumber is null then 0 else studentnumber end) as studentnumber,longtime,t.power,(case when studentnumber=0 then 0 else t.power/studentnumber end) as avePower,t.Materials from t_imstrainmaster ,(select code,(case when sum(Power) is null then 0 else sum(Power) end) as Power,(case when sum(Materials) is null then 0 else sum(Materials) end) as Materials from t_imsintraining where ttype='校内实训' group by code) as t where t_imstrainmaster.code=t.code) AS t_imsintraining"
+           adminname="(select t.code,name,course,TeacherCode,teacher,classes,startDate,endDate,(case when studentnumber is null then 0 else studentnumber end) as studentnumber,longtime,t.power,(case when studentnumber=0 then 0 else t.power/studentnumber end) as avePower,t.Materials from t_imstrainmaster ,(select code,(case when sum(Power) is null then 0 else sum(Power) end) as Power,(case when sum(Materials) is null then 0 else sum(Materials) end) as Materials from t_imsintraining where ttype='校内实训' group by code) as t where t_imstrainmaster.code=t.code) AS t_imsintraining" defaultorder="code DESC" excel="true">
+    <code text="单据号" ></code>
+    <course visibility="hidden" text="课程" export2excel="false" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'course',_this:this})"></course>
+    <name  text="实训课程" ></name>
+    <startDate  text="开始日期" dateformat="yyyy/MM/dd" search-type="date" search-adv="true"></startDate>
+    <endDate  text="结束日期" dateformat="yyyy/MM/dd" search-type="date"></endDate>
+    <longtime  text="实训课时（每人）"></longtime>
+    <TeacherCode visibility="hidden" encrypted="true" export2excel="false"></TeacherCode>
+    <classes  text="班级" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></classes>
+    <studentnumber  text="应到人数"></studentnumber>
+    <teacher  text="实训教师" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></teacher>
+    <power  text="用电量"></power>
+    <avePower  text="人均用电量"></avePower>
+    <Materials  text="物料"></Materials>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="window.location.href='account_manual.aspx';return false;">
+        <span class="glyphicon glyphicon-plus" title="计算"></span>计算
+      </span>
+      <span class="rt-pager-btn" onclick="courseCharts();return false;">
+        <span class="glyphicon glyphicon-import" title="课程柱状图"></span>课程柱状图
+      </span>
+      <span class="rt-pager-btn" onclick="teacherCharts();return false;">
+        <span class="glyphicon glyphicon-import" title="教师柱状图"></span>教师柱状图
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="综合服务信息"  filter="TeacherCode" navname="综合服务信息" admin-role="sys" admin-power="" ignoredfilters="TeacherCode"
+           name="(select p.endtraindate, p.longtime, p.trainroom,p.starttraindate, p.studentnumber,p.traincenter,p.TeacherCode, p.traindate,p.classes,p.ttype from t_imsintraining p  where p.isapproval = '批准' and p.ttype='综合服务' ) AS t_imsintraining"
+           adminname="(select p.endtraindate, p.longtime, p.trainroom,p.starttraindate, p.studentnumber,p.traincenter,p.TeacherCode, p.traindate,p.classes,p.ttype from t_imsintraining p where p.isapproval = '批准' and p.ttype='综合服务' ) AS t_imsintraining" defaultorder="traindate DESC" excel="true">
+    <name  text="课程"></name>
+    <traindate  text="服务日期" dateformat="yyyy/MM/dd" ></traindate>
+    <ttype  text="服务类型"></ttype>
+    <classes  text="服务对象"></classes>
+    <studentnumber  text="服务人数"></studentnumber>
+    <longtime  text="服务课时（每人）"></longtime>
+    <TeacherCode visibility="hidden" encrypted="true"></TeacherCode>
+    <endtraindate text="结束日期" visibility="hidden" dateformat="yyyy/MM/dd" search-type="date" search-adv="true"></endtraindate>
+    <starttraindate text="开始日期" visibility="hidden" dateformat="yyyy/MM/dd" search-type="date" search-adv="true"></starttraindate>
+    <traincenter  text="实训中心"></traincenter>
+    <trainroom  text="实训室"></trainroom>
+
+  </table>
+  <table id="鉴定项目信息"  filter="TeacherCode" navname="鉴定项目信息" admin-role="sys" admin-power="" ignoredfilters="TeacherCode"
+           name="(select p.studentnumber,p.traincenter,p.projectname,p.longtime,p.trainroom,s.appraisaldate,s.socialsource,s.special,s.identificatiostation,s.tfdegree,w.description,w.grade from t_imsintraining p,t_imscoursechedule s,t_imsclass1 w where p.isapproval = '批准' and p.CourseID = s.OBJ_ID and p.classes = w.name) AS t_imsintraining"
+           adminname="(select p.studentnumber,p.traincenter,p.projectname,p.longtime,p.trainroom,s.appraisaldate,s.socialsource,s.special,s.identificatiostation,s.tfdegree,w.description,w.grade from t_imsintraining p,t_imscoursechedule s,t_imsclass1 w where p.isapproval = '批准' and p.CourseID = s.OBJ_ID and p.classes = w.name) AS t_imsintraining" excel="true">
+    <appraisaldate  text="鉴定日期" dateformat="yyyy-MM-dd"></appraisaldate>
+    <projectname  text="专业技术考核项目"></projectname>
+    <special  text="专业名称"></special>
+    <grade  text="年级"></grade>
+    <description  text="班级名称"></description>
+    <traincenter  text="实训中心"></traincenter>
+    <studentnumber  text="鉴定人数"></studentnumber>
+    <identificatiostation  text="鉴定站所名称（考核点）"></identificatiostation>
+    <tfdegree  text="鉴定等级"></tfdegree>
+    <trainroom  text="鉴定地点(实训室)"></trainroom>
+    <longtime  text="鉴定课时(每人)"></longtime>
+    <socialsource  text="社会人员来源"></socialsource>
+  </table>
+  <table id="实训项目信息"  filter="TeacherCode" navname="实训项目信息" admin-role="sys" admin-power="" ignoredfilters="TeacherCode"
+           name="(select c.code,c.trainroom,c.traincenter,c.subjects,c.name,c.grade,c.classes,c.traindate,c.studentnumber,c.realstudentnumber,h.longtime from (select a.code,a.MID,a.OBJ_ID,a.ttype,a.trainroom,a.traincenter,a.subjects,a.starttraindate,a.endtraindate,a.name,a.traindate,a.studentnumber,a.realstudentnumber,a.studentsource,a.issubsidies,b.MajorType,b.grade,a.classes,b.description from t_imsintraining a, t_imsclass1 b where a.classes = b.name and a.isapproval = '批准') as c,(select MID,(Count(*) * 2)  as longtime from t_imsintraining group by MID) as h where c.MID = h.MID) AS t_imsintraining"
+           adminname="(select c.code,c.trainroom,c.traincenter,c.subjects,c.name,c.grade,c.classes,c.traindate,c.studentnumber,c.realstudentnumber,h.longtime from (select a.code,a.MID,a.OBJ_ID,a.ttype,a.trainroom,a.traincenter,a.subjects,a.starttraindate,a.endtraindate,a.name,a.traindate,a.studentnumber,a.realstudentnumber,a.studentsource,a.issubsidies,b.MajorType,b.grade,a.classes,b.description from t_imsintraining a, t_imsclass1 b where a.classes = b.name and a.isapproval = '批准') as c,(select MID,(Count(*) * 2)  as longtime from t_imsintraining group by MID) as h where c.MID = h.MID) AS t_imsintraining" excel="true">
+    <code  text="单据号"></code>
+    <traincenter  text="实训中心"></traincenter>
+    <trainroom  text="实训室"></trainroom>
+    <classes  text="班级"></classes>
+    <name  text="实训项目"></name>
+    <traindate  text="实训日期" dateformat="yyyy-MM-dd"></traindate>
+    <subjects  text="专业名称"></subjects>
+    <grade  text="年级"></grade>
+    <studentnumber  text="应到人数"></studentnumber>
+    <realstudentnumber  text="实到人数"></realstudentnumber>
+    <longtime  text="实训课时（每人）"></longtime>
+  </table>
+</tables>

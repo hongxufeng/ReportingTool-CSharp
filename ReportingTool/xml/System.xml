@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="授课维护" name="(SELECT OBJ_ID,code,name,classes,teacher,startDate,endDate,
+                                       (CAST(startDate AS nvarchar)+'~'+CAST(endDate AS nvarchar)) AS Period,
+                                       ttype FROM t_imscoursechedule) AS t_imscoursechedule"
+         admin-role="sys" defaultorder="startDate DESC,code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true" search-adv="true"></code>
+    <name text="名称" search-type="true"></name>
+    <classes text="上课班级" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></classes>
+    <teacher text="授课教师" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></teacher>
+    <startDate visibility="hidden" text="开始日期" dateformat="yy-MM-dd" search-type="date" search-adv="true"></startDate>
+    <endDate visibility="hidden" text="结束日期" dateformat="yy-MM-dd" search-type="date" search-adv="true"></endDate>
+    <Period text="日期"></Period>
+    <ttype text="课程类型" search-type="true" search-adv="true"></ttype>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑课程" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建课程"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('授课维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除课程"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel()">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="系别维护" name="(SELECT OBJ_ID,code,name,description FROM t_imsdepartment) AS t_imsdepartment" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID" excel="true">
+    <OBJ_ID visibility="hidden" export2excel="false"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <description text="描述" search-type="true" search-adv="true"></description>
+    <buttons>
+      <span class="glyphicon glyphicon-edit $$:code:$$ $$:name:$$" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('系别维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('系别表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="系统管理员维护" name="(SELECT OBJ_ID,staffno,name FROM T_Person WHERE identitystate='sys') AS T_Person" admin-role="sys" defaultorder="staffno ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <staffno text="编号" search-type="true"></staffno>
+    <name text="登录名" search-type="true"></name>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('系统管理员维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('授课维护表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="企业维护" name="(SELECT OBJ_ID,CLASS_ID,code,name,website,qq,doc FROM t_imsenterprise) AS t_imsenterprise" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <CLASS_ID visibility="hidden"></CLASS_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="登录名" search-type="true"></name>
+    <website text="网址" search-type="true" search-adv="true"></website>
+    <qq text="QQ" search-type="true" search-adv="true"></qq>
+    <doc text="附件"></doc>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-cloud-upload" title="上传附件" onclick=""></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('企业维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="教师维护" name="(SELECT OBJ_ID,GH,XM,XBM,Professional FROM t_imsteacher) AS t_imsteacher" admin-role="sys" defaultorder="GH ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <GH text="工号" search-type="true"></GH>
+    <XM text="姓名" search-type="true" visibility="visible"></XM>
+    <XBM text="性别" search-type="true" search-adv="true"></XBM>
+    <Professional text="职称" search-type="true" search-adv="true"></Professional>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('教师维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('教师表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="学生维护" name="(SELECT OBJ_ID,XH,XM,XBM,classes FROM t_imsstudent) AS t_imsstudent" admin-role="sys" defaultorder="classes ASC,XH ASC" checkbox="OBJ_ID"
+           parentnode="{'班级维护':{'classes':'name'}}">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <XH text="学号" search-type="true" visibility="visible"></XH>
+    <XM text="姓名" search-type="true" visibility="visible"></XM>
+    <XBM text="性别" search-type="true" search-adv="true"></XBM>
+    <classes text="班级" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'classes',_this:this})"></classes>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('学生维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('学生表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="年级维护" name="(SELECT OBJ_ID,code,name FROM t_imsgrade) AS t_imsgrade" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('年级维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('年级表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="设备维护" name="(SELECT OBJ_ID,code,name,RoomCode,room,devicetype,XQDM,GHS,SYZT,BFZT FROM t_imsdevice) AS t_imsdevice" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <RoomCode visibility="hidden"></RoomCode>
+    <name text="名称" search-type="true"></name>
+    <room text="实训室" search-adv="true" selector-func="GetValue" selector-text="实訓室" selector-multi="true"></room>
+    <devicetype text="设备类型" search-type="true" search-adv="true" selector-func="GetValue" selector-multi="true"></devicetype>
+    <XQDM text="校区代码" search-type="true" search-adv="true"></XQDM>
+    <GHS text="供货商" search-type="true" search-adv="true" selector-func="GetValue"></GHS>
+    <SYZT text="使用状态" search-type="true" search-adv="true" defaultvalue="0"></SYZT>
+    <BFZT text="报废状态码" search-type="true" search-adv="true" defaultvalue="领料出库"></BFZT>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('设备维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('设备信息表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="课程维护" name="(SELECT OBJ_ID,code,name,subject,special FROM t_imscourse) AS t_imscourse" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <subject text="科目" search-type="true" search-adv="true"></subject>
+    <special text="专业" search-type="true" search-adv="true"></special>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('课程维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('课程信息表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="专业维护" name="(SELECT OBJ_ID,code,name,department FROM t_imsspecial) AS t_imsspecial" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true" visibility="visible"></name>
+    <department text="系别" search-type="true" search-adv="true"></department>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('专业维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('专业表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="科目维护" name="(SELECT t_imssubject.OBJ_ID,t_imssubject.code,t_imssubject.name,t_imsspecial.name AS special FROM t_imssubject LEFT OUTER JOIN t_imsspecial
+                                        ON t_imssubject.specialID=t_imsspecial.OBJ_ID) AS t_imssubject" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code search-type="true" text="编号"></code>
+    <name search-type="true" text="名称"></name>
+    <special text="专业" search-type="true" search-adv="true"></special>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('科目维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('科目表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="班级维护" name="(SELECT t_imsclass1.OBJ_ID,t_imsclass1.code,t_imsclass1.name,t_imsclass1.special,t_imsclass1.grade,t_imsclass1.etype,t_imsclass1.studentnumber,t_imsteacher.XM
+                                        FROM t_imsclass1 LEFT OUTER JOIN t_imsteacher
+                                        ON t_imsclass1.TeacherCode=t_imsteacher.GH) AS t_imsclass1" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID"
+           childtree="{'学生维护':{'name':'classes'},'教师维护':{'name':'GH'}}" parentnode="{'专业维护':{'special':'name'}}">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true" visibility="visible"></name>
+    <special text="专业" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'special',_this:this})"></special>
+    <grade text="年级" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'grade',_this:this})"></grade>
+    <etype text="学制" search-type="true" search-adv="true"></etype>
+    <studentnumber text="学生人数" search-type="true" search-adv="true"></studentnumber>
+    <XM text="班主任" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></XM>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('班级维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('班级表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="实训中心" name="(SELECT OBJ_ID,code,name FROM t_imstriancenter) AS t_imstriancenter" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true"></code>
+    <name text="名称" search-type="true"></name>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('实训中心','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('实训中心表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="电价维护" name="(SELECT OBJ_ID   ,moddate  ,price   FROM  t_imsElectricityPrice) AS t_imsElectricityPrice" admin-role="sys" defaultorder="OBJ_ID ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <moddate text="日期" search-type="true"></moddate>
+    <price text="价格" search-type="true"></price>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('电价维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="实训室维护" name="(SELECT t_imsroom.OBJ_ID,t_imsroom.code,t_imsroom.name,t_imsroom.devicesnumber,t_imsroom.traincenter,t_imsteacher.XM,t_imsroom.icid 
+                                          FROM t_imsroom LEFT OUTER JOIN t_imsteacher
+                                          ON t_imsroom.manager=t_imsteacher.GH) AS t_imsroom" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <code text="编号" search-type="true" search-adv="true"></code>
+    <name text="名称" search-type="true"></name>
+    <devicesnumber text="设备数量" search-type="true" search-adv="true"></devicesnumber>
+    <traincenter text="实训中心" search-type="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'trainingcenter',_this:this})"></traincenter>
+    <XM text="管理员" search-type="true" search-adv="true" search-btn-icon="search" search-btn-func="showTableInModal({table:'teacher',_this:this})"></XM>
+    <icid text="刷卡机号" search-type="true" search-adv="true"></icid>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('实训室维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('实训室信息表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="标准评语库" name="(SELECT OBJ_ID,simpletext FROM t_imsstandardlibrary) AS t_imsstandardlibrary" admin-role="sys" defaultorder="OBJ_ID ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <simpletext text="标准评语" search-type="true"></simpletext>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('标准评语库','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="节假日维护" name="(SELECT OBJ_ID,name,date,flag FROM t_imsholiday) AS t_imsholiday" admin-role="sys" defaultorder="OBJ_ID ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <name text="名称" search-type="true"></name>
+    <date text="日期" search-type="true" dateformat="yyyy/MM/dd"></date>
+    <flag text="是否上课" regex-pattern="False" regex-replacement="否" search-type="true" search-adv="true"></flag>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn" onclick="deleteData('节假日维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+</tables>

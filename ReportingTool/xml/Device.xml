@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="设备报修" name="(select t_imstraindevice.device as device,t_imsdevice.name as devicename,t_imsdevice.room as room,t_imstraindevice.[state] as states,t_imsmarks.name as statename,t_imstraindevice.starttraindate as starttraindate,t_imstraindevice.endtraindate as endtraindate
+                 ,t_imstraindevice.teacher as teacher,t_imstraindevice.[description] as descriptions,t_imstraindevice.OBJ_ID as OBJ_ID,t_imstraindevice.ttype as ttype,t_imstraindevice.intrainingid as intrainingid,t_imstraindevice.memo as memo,t_imstraindevice.historystate as historystate
+                 from t_imstraindevice
+                 left join t_imsdevice on t_imsdevice.code=device
+                 left join t_imsmarks on t_imsmarks.paramgroup='DeviceRepair' and t_imsmarks.paramorder=[state]
+                 where ttype='设备维修' and [state]=1 and historystate=1) as imsrepair" defaultorder="devicename" admin-role="sys,teacher">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <device visibility="hidden"></device>
+    <devicename text="设备名称"></devicename>
+    <room text="实训室"></room>
+    <ttype visibility="hidden"></ttype>
+    <intrainingid visibility="hidden"></intrainingid>
+    <teacher text="维修人员"></teacher>
+    <starttraindate text="开始时间"  search-type="date" dateformat="yy年MM月dd日"></starttraindate>
+    <endtraindate text="结束时间"  search-type="date" dateformat="yy年MM月dd日"></endtraindate>
+    <descriptions  text="故障描述" search-type="none"></descriptions>
+    <states  visibility="hidden"></states>
+    <statename  text="状态" search-type="none"></statename>
+    <intrainingid visibility="hidden"></intrainingid>
+    <memo text="备注" search-type="none"></memo>
+    <historystate visibility="hidden"></historystate>
+    <buttons>
+      <span class="glyphicon glyphicon-ok" title="完成" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-remove" title="取消" onclick="cancel(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create('设备报修')">
+        <span class="glyphicon glyphicon-plus" title="新增报修"></span>新增报修
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="设备维修" name="(select t_imstraindevice.device as device,t_imsdevice.name as devicename,t_imsdevice.room as room,t_imstraindevice.[state] as states,t_imsmarks.name as statename,t_imstraindevice.starttraindate as starttraindate,t_imstraindevice.endtraindate as endtraindate
+                 ,t_imstraindevice.teacher as teacher,t_imstraindevice.[description] as descriptions,t_imstraindevice.OBJ_ID as OBJ_ID,t_imstraindevice.ttype as ttype,t_imstraindevice.intrainingid as intrainingid,t_imstraindevice.memo as memo,t_imstraindevice.historystate as historystate
+                 from t_imstraindevice
+                 left join t_imsdevice on t_imsdevice.code=device
+                 left join t_imsmarks on t_imsmarks.paramgroup='DeviceRepair' and t_imsmarks.paramorder=[state]
+                 where ttype='设备维修' and [state]=2 and historystate=1) as imsrepair" defaultorder="devicename" admin-role="sys,teacher">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <device visibility="hidden"></device>
+    <devicename text="设备名称"></devicename>
+    <room text="实训室"></room>
+    <ttype visibility="hidden"></ttype>
+    <intrainingid visibility="hidden"></intrainingid>
+    <teacher text="维修人员"></teacher>
+    <starttraindate text="开始时间"  search-type="date" dateformat="yy年MM月dd日"></starttraindate>
+    <endtraindate text="结束时间"  search-type="date" dateformat="yy年MM月dd日"></endtraindate>
+    <descriptions  text="故障描述" search-type="none"></descriptions>
+    <states  visibility="hidden"></states>
+    <statename  text="状态" search-type="none"></statename>
+    <intrainingid visibility="hidden"></intrainingid>
+    <memo text="备注" search-type="none"></memo>
+    <historystate visibility="hidden"></historystate>
+    <buttons>
+      <span class="glyphicon glyphicon-ok" title="完成" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-remove" title="取消" onclick="cancel(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create('设备维修')">
+        <span class="glyphicon glyphicon-plus" title="新增维修"></span>新增维修
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="维修历史" name="(select t_imstraindevice.device as device,t_imsdevice.name as devicename,t_imsdevice.room as room,t_imstraindevice.[state] as states,t_imsmarks.name as statename,t_imstraindevice.starttraindate as starttraindate,t_imstraindevice.endtraindate as endtraindate
+                 ,t_imstraindevice.teacher as teacher,t_imstraindevice.[description] as descriptions,t_imstraindevice.OBJ_ID as OBJ_ID,t_imstraindevice.ttype as ttype,t_imstraindevice.intrainingid as intrainingid,t_imstraindevice.memo as memo,t_imstraindevice.historystate as historystate
+                 from t_imstraindevice
+                 left join t_imsdevice on t_imsdevice.code=device
+                 left join t_imsmarks on t_imsmarks.paramgroup='DeviceRepair' and t_imsmarks.paramorder=[state]
+                 where ttype='设备维修' and historystate=2) as imsrepair" defaultorder="devicename" admin-role="sys,teacher" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <device visibility="hidden"></device>
+    <devicename text="设备名称"></devicename>
+    <room text="实训室"></room>
+    <ttype visibility="hidden"></ttype>
+    <intrainingid visibility="hidden"></intrainingid>
+    <teacher text="维修人员"></teacher>
+    <starttraindate text="开始时间"  search-type="date" dateformat="yy年MM月dd日"></starttraindate>
+    <endtraindate text="结束时间"  search-type="date" dateformat="yy年MM月dd日"></endtraindate>
+    <descriptions  text="故障描述" search-type="none"></descriptions>
+    <states  visibility="hidden"></states>
+    <statename  text="阶段"></statename>
+    <intrainingid visibility="hidden"></intrainingid>
+    <memo text="备注" search-type="none"></memo>
+    <historystate visibility="hidden"></historystate>
+    <buttons>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="deleteConfirm('history','维修历史','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="设备7S评分" name="(SELECT OBJ_ID,roomcode,devicecode,scoredate,score  FROM T_Device7sDetails) AS T_Device7sDetails"
+       admin-role="sys" defaultorder="scoredate DESC,devicecode ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <roomcode text="实训室编号" search-type="true"></roomcode>
+    <devicecode text="设备编号" search-type="true"></devicecode>
+    <scoredate text="评分日期" dateformat="yy年MM月dd日" search-type="range" search-adv="true"></scoredate>
+    <score text="评分"></score>
+    <pagerbuttons> 
+      <span class="rt-pager-btn" onclick="new7s()">
+        <span class="glyphicon glyphicon-plus" title="新建评分"></span>新建评分
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="7S评分添加" name="(SELECT t_imsdevice.name as name,t_imsdevice.code as code,t_imsroom.name as roomname,t_imsdevice.roomcode as roomcode,T_Device7sDetails.score as score,T_Device7sDetails.scoredate as scoredate
+                     FROM t_imsroom
+                     join t_imsdevice on t_imsroom.code=t_imsdevice.roomcode
+                     left join T_Device7sDetails on t_imsdevice.code=T_Device7sDetails.devicecode and T_Device7sDetails.scoredate=@scoredate
+                     where t_imsroom.manager=@manager) AS t_7sadd"
+         adminname="(SELECT t_imsdevice.name as name,t_imsdevice.code as code,t_imsroom.name as roomname,t_imsdevice.roomcode as roomcode,T_Device7sDetails.score as score,T_Device7sDetails.scoredate as scoredate
+                     FROM t_imsroom
+                     join t_imsdevice on t_imsroom.code=t_imsdevice.roomcode
+                     left join T_Device7sDetails on t_imsdevice.code=T_Device7sDetails.devicecode and T_Device7sDetails.scoredate=@scoredate) AS t_7sadd"
+    defaultorder="code ASC" admin="sys"  ignoredfilters="manager" tabby="roomname">
+    <name text="设备名称"></name>
+    <code text="设备编号"></code>
+    <roomname text="实训室" search-type="none"></roomname>
+    <roomcode visibility="hidden"></roomcode>
+    <scoredate visibility="hidden"></scoredate>
+    <score text="评分" search-type="none" formatter="PutInText"></score>
+  </table>
+</tables>

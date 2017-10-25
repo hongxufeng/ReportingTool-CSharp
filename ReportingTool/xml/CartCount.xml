@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="教师刷卡统计" 
+           name="(select  a.person as name,a.personid as XGH,d.course as subjects,c.student as student,dbo.getstunamebycode(c.student,',')as stuname,d.teacher as teacher,d.teacherCode as teacherCode,a.device as device,a.starttraindate as starttraindate,a.shuakadate as enttraindate, datediff(second,a.starttraindate,a.shuakadate) as shuaka,c.classes as classes   
+                from ims_ykt as a
+                left join t_imsdevice as b on a.device=b.name
+                left join t_imstraindevice as c on c.device=b.code and 
+                ((datediff(minute,a.starttraindate,c.starttraindate)>-30 and datediff(minute,a.starttraindate,c.starttraindate)&lt;30) 
+                or (datediff(minute,a.shuakadate,c.endtraindate)>-30 and datediff(minute,a.shuakadate,c.endtraindate)&lt;30))
+                left join t_imsintraining as d on d.obj_id=c.intrainingid
+                where a.starttraindate is not null) as teacherCartCount" defaultorder="name" excel="true">
+    <teacherCode text="老师编号" visibility="hidden"></teacherCode>
+    <name text="刷卡老师"></name>
+    <XGH text="一卡通编号" search-type="none"></XGH>
+    <subjects text="课程"></subjects>
+    <teacher text="实训主讲老师" search-type="none"></teacher>
+    <device text="设备"></device>
+    <shuaka text="加工时间" timetransfer="second" search-type="none"></shuaka>
+    <starttraindate text="实际开机时间"  search-type="date"></starttraindate>
+    <enttraindate text="实际关机时间"  search-type="date"></enttraindate>
+    <student  text="学生学号" visibility="hidden"></student>
+    <stuname  text="学生" regex-pattern="," regex-replacement="&lt;br/>"></stuname>
+    <classes text="班级"></classes>
+  </table>
+</tables>

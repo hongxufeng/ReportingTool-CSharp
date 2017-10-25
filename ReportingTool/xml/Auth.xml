@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="组织维护" name="(SELECT OBJ_ID,code,name,description FROM t_imsdepartment) AS t_imsdepartment" admin-role="sys" defaultorder="code ASC" checkbox="OBJ_ID">
+    <OBJ_ID visibility="hidden" export2excel="false"></OBJ_ID>
+    <code text="编号" search-type="true" visibility="visible" formatter-r="[$$::$$]"></code>
+    <name text="名称" search-type="true" visibility="visible"></name>
+    <description text="描述" search-type="true" search-adv="true"></description>
+    <buttons>
+      <span class="glyphicon glyphicon-edit $$:code:$$ $$:name:$$" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新建"></span>新建
+      </span>
+      <span class="rt-pager-btn rt-btn-disabled" onclick="deleteData('系别维护','OBJ_ID')">
+        <span class="glyphicon glyphicon-trash" title="删除"></span>删除
+      </span>
+      <span class="rt-pager-btn" onclick="importExcel('系别表')">
+        <span class="glyphicon glyphicon-import" title="批量导入"></span>导入
+      </span>
+    </pagerbuttons>
+  </table>
+</tables>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="企业问卷维护" 
+           name="(select name,ptype,OBJ_ID,creator,creationdate from t_imspaper where t_imspaper.ptype='企业问卷')AS t_imsFeedback">
+    <name text="问卷名称"  formatter-s=""  search-type="true"></name>
+    <OBJ_ID text="参与人数" formatter="FeedbackGetNumber"></OBJ_ID>
+    <ptype text="问卷类型" formatter-r="&lt;b>问卷类型&lt;/b>：$$::$$"></ptype>
+    <creator text="创建人"  formatter-r="&lt;b>创建人&lt;/b>：$$::$$"></creator>
+    <creationdate text="创建日期" formatter-r="&lt;b>创建日期&lt;/b>：$$::$$"></creationdate>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-trash" title="删除" onclick="deleteThis(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新增问卷"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="企业反馈维护" name="(select OBJ_ID,enterprise,name,description from t_imsenterprisefeedback)AS t_imsenterprisefeedback">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <enterprise text="企业"></enterprise>
+    <name text="标题"></name>
+    <description text="信息"></description>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-trash" title="批量删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="家长问卷维护"
+           name="(select name,ptype,OBJ_ID,creator,creationdate from t_imspaper where t_imspaper.ptype='家长问卷')AS t_imsFeedback">
+    <name text="问卷名称"  formatter-s=""  search-type="true"></name>
+    <OBJ_ID text="参与人数" formatter="FeedbackGetNumber"></OBJ_ID>
+    <ptype text="问卷类型" formatter-r="&lt;b>问卷类型&lt;/b>：$$::$$"></ptype>
+    <creator text="创建人"  formatter-r="&lt;b>创建人&lt;/b>：$$::$$"></creator>
+    <creationdate text="创建日期" formatter-r="&lt;b>创建日期&lt;/b>：$$::$$"></creationdate>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-trash" title="删除" onclick="deleteThis(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新增问卷"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="家长反馈维护" name="(select OBJ_ID,genearch,name,description from t_imsgenearchfeedback)AS t_imsgenearchfeedback">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <genearch text="家长"></genearch> 
+    <name text="标题"></name>
+    <description text="信息"></description>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-trash" title="批量删除"></span>删除
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="教师问卷维护"
+           name="(select name,ptype,OBJ_ID,creator,creationdate from t_imspaper where t_imspaper.ptype='教师问卷')AS t_imsFeedback">
+    <name text="问卷名称"  formatter-s=""  search-type="true"></name>
+    <OBJ_ID text="参与人数" formatter="FeedbackGetNumber"></OBJ_ID>
+    <ptype text="问卷类型" formatter-r="&lt;b>问卷类型&lt;/b>：$$::$$"></ptype>
+    <creator text="创建人"  formatter-r="&lt;b>创建人&lt;/b>：$$::$$"></creator>
+    <creationdate text="创建日期" formatter-r="&lt;b>创建日期&lt;/b>：$$::$$"></creationdate>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="view(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="edit(this,'OBJ_ID')"></span>
+      <span class="glyphicon glyphicon-trash" title="删除" onclick="deleteThis(this,'OBJ_ID')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="create()">
+        <span class="glyphicon glyphicon-plus" title="新增问卷"></span>添加
+      </span>
+    </pagerbuttons>
+  </table>
+  <table id="题干"
+           name="(select t_imsTopic.obj_id,t_imsTopic.name,T_imspapertopiclink.roleA_id from t_imsTopic,T_imspapertopiclink where T_imspapertopiclink.roleB_id= t_imsTopic.obj_id)AS t_imsTopic">
+    <name text="题干"></name>
+    <obj_id visibility="hidden"></obj_id>
+    <roleA_id visibility="hidden"></roleA_id>
+    <buttons>
+      <span class="glyphicon glyphicon-folder-open" title="浏览" onclick="viewTopic(this,'obj_id')"></span>
+      <span class="glyphicon glyphicon-edit" title="编辑" onclick="editTopic(this,'obj_id')"></span>
+      <span class="glyphicon glyphicon-trash" title="删除" onclick="deleteTopic(this,'obj_id')"></span>
+    </buttons>
+    <pagerbuttons>
+      <span class="rt-pager-btn" onclick="addTopic()">
+        <span class="glyphicon glyphicon-plus" title="新增题干"></span>新增题干
+      </span>
+    </pagerbuttons>
+  </table>
+</tables>

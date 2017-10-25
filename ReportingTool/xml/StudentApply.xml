@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="学生申请" filter="studentID" admin="sys,teacher"
+           name="(Select t_imsstudent.XM as stuname,t_imsgroupLink.stuno as studentID,t_imstraindevice.code as code,t_imscoursegroup.name as name,t_imstraindevice.device as device, t_imscoursegroup.Mainteacher as teacher,t_imstraindevice.traindate as traindate,t_imstraindevice.starttraindate as starttraindate, t_imstraindevice.endtraindate as endtraindate
+               from t_imstraindevice
+               join t_imscoursegroup on t_imstraindevice.CourseGroupCode = t_imscoursegroup.code 
+               join t_imsgroup on t_imstraindevice.code=t_imsgroup.CourseCode
+               join t_imsgroupLink on t_imsgroup.OBJ_ID = t_imsgroupLink.groupID
+               join t_imsstudent on t_imsgroupLink.stuno=t_imsstudent.XH) AS t_imsapply" ignoredfilters="studentID" defaultorder="stuname">
+    <stuname text="姓名"></stuname>
+    <studentID text="学号" encrypted="true" search-type="none"></studentID>
+    <code text="课程编号" search-type="none"></code>
+    <name text="课程"></name>
+    <device text="设备编号"></device>
+    <teacher text="主讲教师"></teacher>
+    <traindate text="实训日期" dateformat="yyyy-MM-dd" search-type="date"></traindate>
+    <starttraindate dateformat="HH:mm" text="开始时间" search-type="none"></starttraindate>
+    <endtraindate dateformat="HH:mm" text="结束时间" search-type="none"></endtraindate>
+  </table>
+</tables>

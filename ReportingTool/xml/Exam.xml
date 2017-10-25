@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table id="评分表" name="(SELECT T_ExMarkSheets.OBJ_ID,T_ExMarkSheets.Code,T_ExMarkSheets.Name,T_ExMarkSheets.[Description],T_ExMarkSheets.CourseCode,
+                                                T_Person.name AS XM,
+                                                T_ExMarkSheets.CreatedBy,T_ExMarkSheets.LastModifiedBy,T_ExMarkSheets.CreationDate,T_ExMarkSheets.LastModifiedDate                                                
+                                     FROM T_ExMarkSheets,T_Person
+                                     WHERE T_ExMarkSheets.CreatedBy=CAST(T_Person.OBJ_ID AS nvarchar)) AS T_ExMarkSheets"
+           filter="CourseCode" admin-role="sys" defaultorder="Code ASC">
+    <OBJ_ID visibility="hidden"></OBJ_ID>
+    <Code text="编号"></Code>
+    <Name text="名称"></Name>
+    <Description visibility="hidden"></Description>
+    <CourseCode visibility="hidden"></CourseCode>
+    <XM text="创建人"></XM>
+    <CreatedBy visibility="hidden"></CreatedBy>
+    <LastModifiedBy visibility="hidden"></LastModifiedBy>
+    <CreationDate text="创建日期" search-type="date"></CreationDate>
+    <LastModifiedDate visibility="hidden"></LastModifiedDate>
+    <pagerbuttons>
+      <span class="glyphicon glyphicon-ok" title="提交" onclick="bindMs()"></span>      
+    </pagerbuttons>
+  </table>
+</tables>
